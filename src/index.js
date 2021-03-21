@@ -6,11 +6,30 @@ registerBlockType('rob/table-of-contents', {
   description: 'Sekcja z nagłówiem oraz spisem treści, konkretnego artykułu',
   icon: 'editor-table',
   keywords: ['zawartość', 'lista', 'table of contents'],
-  category: 'layout',
+  category: 'content',
 
-  edit() {
-    return <p>Coś innego, niż "Hello world".</p>;
+  attributes: {
+    title: {
+      type: 'string',
+      source: 'html',
+      selector: 'h2',
+    },
   },
 
-  save() {},
+  edit({ attributes, setAttributes }) {
+    const { title } = attributes;
+
+    function setTitle(event) {
+      const newTitle = event.target.value;
+      setAttributes({ title: newTitle });
+    }
+
+    return <input type="text" value={title} onChange={setTitle} />;
+  },
+
+  save({ attributes }) {
+    const { title } = attributes;
+
+    return <h2>{title}</h2>;
+  },
 });
