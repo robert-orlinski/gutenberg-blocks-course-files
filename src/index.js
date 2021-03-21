@@ -1,3 +1,4 @@
+import './index.scss';
 import { registerBlockType } from '@wordpress/blocks';
 
 registerBlockType('rob/table-of-contents', {
