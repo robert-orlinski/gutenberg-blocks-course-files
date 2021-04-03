@@ -8,10 +8,13 @@
 
 function add_gutenberg_assets() {
 
+  $dependencies = include(plugin_dir_path(__FILE__) . 'build/index.asset.php');
+
   wp_register_script(
     'table-of-contents',
     plugin_dir_url(__FILE__) . 'build/index.js',
-    array('wp-blocks', 'wp-editor', 'wp-components')
+    $dependencies['dependencies'],
+    $dependencies['version'],
   );
 
   wp_register_style(
