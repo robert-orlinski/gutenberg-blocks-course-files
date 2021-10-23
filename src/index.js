@@ -48,7 +48,7 @@ registerBlockType('rob/table-of-contents', {
     },
     list: {
       type: 'string',
-      sorce: 'children',
+      source: 'children',
       selector: 'ol',
     },
   },
