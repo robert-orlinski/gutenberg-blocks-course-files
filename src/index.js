@@ -1,8 +1,8 @@
 import './index.scss';
 
 import { registerBlockType } from '@wordpress/blocks';
-import { RichText, BlockControls } from '@wordpress/block-editor';
-import { Toolbar, ToolbarButton, Icon } from '@wordpress/components';
+import { RichText, BlockControls, InspectorControls } from '@wordpress/block-editor';
+import { Toolbar, ToolbarButton, Icon, PanelBody } from '@wordpress/components';
 import { registerFormatType, toggleFormat } from '@wordpress/rich-text';
 import { useSelect } from '@wordpress/data';
 
@@ -74,37 +74,47 @@ registerBlockType('rob/table-of-contents', {
     }
 
     return (
-      <div class="table-of-contents-block">
-        <RichText
-          tagName="h2"
-          placeholder="Tytuł spisu treści"
-          value={title}
-          onChange={setTitle}
-          allowedFormats={[
-            'core/bold',
-            'core/italic',
-            'core/link',
-            'core/text-color',
-            'core/strikethrough',
-            'custom-formats/highlight',
-          ]}
-        />
-        <RichText
-          tagName="ol"
-          placeholder="Spis treści"
-          value={list}
-          multiline="li"
-          onChange={setListContent}
-          allowedFormats={[
-            'core/bold',
-            'core/italic',
-            'core/link',
-            'core/text-color',
-            'core/strikethrough',
-            'custom-formats/highlight',
-          ]}
-        />
-      </div>
+      <>
+        <InspectorControls>
+          <PanelBody title="Tytuł pierwszej zakładki">
+            <p>Treść pierwszej zakładki</p>
+          </PanelBody>
+          <PanelBody title="Tytuł drugiej zakładki">
+            <p>Treść drugiej zakładki</p>
+          </PanelBody>
+        </InspectorControls>
+        <div class="table-of-contents-block">
+          <RichText
+            tagName="h2"
+            placeholder="Tytuł spisu treści"
+            value={title}
+            onChange={setTitle}
+            allowedFormats={[
+              'core/bold',
+              'core/italic',
+              'core/link',
+              'core/text-color',
+              'core/strikethrough',
+              'custom-formats/highlight',
+            ]}
+          />
+          <RichText
+            tagName="ol"
+            placeholder="Spis treści"
+            value={list}
+            multiline="li"
+            onChange={setListContent}
+            allowedFormats={[
+              'core/bold',
+              'core/italic',
+              'core/link',
+              'core/text-color',
+              'core/strikethrough',
+              'custom-formats/highlight',
+            ]}
+          />
+        </div>
+      </>
     );
   },
 
