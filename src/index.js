@@ -4,8 +4,17 @@ import { registerBlockType } from '@wordpress/blocks';
 import { RichText, BlockControls } from '@wordpress/block-editor';
 import { Toolbar, ToolbarButton, Icon } from '@wordpress/components';
 import { registerFormatType, toggleFormat } from '@wordpress/rich-text';
+import { useSelect } from '@wordpress/data';
 
 const HighlightButton = (props) => {
+  const selectedBlock = useSelect((select) => {
+    return select('core/block-editor').getSelectedBlock();
+  }, []);
+
+  if (selectedBlock && selectedBlock.name !== 'rob/table-of-contents') {
+    return null;
+  }
+
   return (
     <BlockControls>
       <Toolbar>
