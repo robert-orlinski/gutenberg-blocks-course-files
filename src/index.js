@@ -43,7 +43,7 @@ registerBlockType('rob/table-of-contents', {
   attributes: {
     title: {
       type: 'string',
-      source: 'html',
+      source: 'children',
       selector: 'h2',
     },
     list: {
