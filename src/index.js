@@ -52,7 +52,7 @@ registerBlockType('rob/table-of-contents', {
   attributes: {
     title: {
       type: 'string',
-      source: 'children',
+      source: 'html',
       selector: 'h2',
     },
     list: {
@@ -123,7 +123,7 @@ registerBlockType('rob/table-of-contents', {
 
     return (
       <div class="table-of-contents-block">
-        <h2>{title}</h2>
+        <h2 dangerouslySetInnerHTML={{ __html: title }}></h2>
         <RichText.Content tagName="ol" value={list} />
       </div>
     );
