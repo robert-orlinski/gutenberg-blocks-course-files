@@ -4,7 +4,7 @@ import { RichText } from '@wordpress/block-editor';
 
 registerBlockType('rob/table-of-contents', {
   title: 'Spis treści',
-  description: 'Sekcja z nagłówiem oraz spisem treści, konkretnego artykułu',
+  description: 'Sekcja z nagłówkiem oraz spisem treści konkretnego artykułu',
   icon: 'editor-table',
   keywords: ['zawartość', 'lista', 'table of contents'],
   category: 'content',
