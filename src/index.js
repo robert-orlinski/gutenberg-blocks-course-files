@@ -17,7 +17,7 @@ registerBlockType('rob/table-of-contents', {
       selector: 'h2',
     },
     list: {
-      type: 'string',
+      type: 'array',
       sorce: 'children',
       selector: 'ol',
     },
