@@ -1,6 +1,6 @@
 # Creating your own Gutenberg blocks - course files
 
-Course website: https://blog.robertorlinski.pl/wlasne-bloki-w-wordpress-gutenberg/ (right now, the course is only in Polish)
+Course website: https://robertorlinski.pl/wlasne-bloki-w-wordpress-gutenberg/ (right now, the course is only in Polish)
 
 ---
 
