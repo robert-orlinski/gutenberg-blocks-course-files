@@ -2,7 +2,7 @@ import './index.scss';
 
 import { registerBlockType } from '@wordpress/blocks';
 import { RichText, BlockControls, InspectorControls } from '@wordpress/block-editor';
-import { Toolbar, ToolbarButton, Icon, PanelBody } from '@wordpress/components';
+import { Toolbar, ToolbarButton, Icon, PanelBody, ColorPalette, RangeControl } from '@wordpress/components';
 import { registerFormatType, toggleFormat } from '@wordpress/rich-text';
 import { useSelect } from '@wordpress/data';
 
@@ -44,7 +44,7 @@ registerFormatType('custom-formats/highlight', {
 
 registerBlockType('rob/table-of-contents', {
   title: 'Spis treści',
-  description: 'Sekcja z nagłówiem oraz spisem treści, konkretnego artykułu',
+  description: 'Sekcja z nagłówkiem oraz spisem treści konkretnego artykułu',
   icon: 'editor-table',
   keywords: ['zawartość', 'lista', 'table of contents'],
   category: 'content',
@@ -60,10 +60,16 @@ registerBlockType('rob/table-of-contents', {
       source: 'children',
       selector: 'ol',
     },
+    backgroundColor: {
+      type: 'string',
+    },
+    padding: {
+      type: 'number',
+    },
   },
 
   edit({ attributes, setAttributes }) {
-    const { title, list } = attributes;
+    const { title, list, backgroundColor, padding } = attributes;
 
     function setTitle(newTitle) {
       setAttributes({ title: newTitle });
@@ -73,17 +79,40 @@ registerBlockType('rob/table-of-contents', {
       setAttributes({ list: newList });
     }
 
+    function setBackgroundColor(newColor) {
+      setAttributes({ backgroundColor: newColor });
+    }
+
+    function setPadding(newPadding) {
+      setAttributes({ padding: newPadding });
+    }
+
     return (
       <>
         <InspectorControls>
-          <PanelBody title="Tytuł pierwszej zakładki">
-            <p>Treść pierwszej zakładki</p>
+          <PanelBody title="Kolor tła">
+            <ColorPalette
+              colors={[
+                { name: 'Niebieski', color: '#E3F2FD' },
+                { name: 'Niebieski - przydymiony', color: '#ECEFF1' },
+                { name: 'Czerwony', color: '#FFEBEE' },
+              ]}
+              value={backgroundColor}
+              onChange={setBackgroundColor}
+            />
           </PanelBody>
-          <PanelBody title="Tytuł drugiej zakładki">
-            <p>Treść drugiej zakładki</p>
+          <PanelBody title="Odstęp wewnętrzny">
+            <RangeControl
+              value={padding}
+              onChange={setPadding}
+              initialPosition={0}
+            />
           </PanelBody>
         </InspectorControls>
-        <div class="table-of-contents-block">
+        <div class="table-of-contents-block" style={{ 
+          backgroundColor,
+          padding
+        }}>
           <RichText
             tagName="h2"
             placeholder="Tytuł spisu treści"
@@ -119,10 +148,13 @@ registerBlockType('rob/table-of-contents', {
   },
 
   save({ attributes }) {
-    const { title, list } = attributes;
+    const { title, list, backgroundColor, padding } = attributes;
 
     return (
-      <div class="table-of-contents-block">
+      <div class="table-of-contents-block" style={{ 
+        backgroundColor,
+        padding,
+      }}>
         <h2>{title}</h2>
         <RichText.Content tagName="ol" value={list} />
       </div>
